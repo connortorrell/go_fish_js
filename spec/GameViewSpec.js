@@ -3,7 +3,7 @@ describe('GameView', () => {
     this.names = ['Player1', 'Player2']
     const players = [new Player(names[0]), new Player(names[1])]
     const game = new Game(players)
-    const view = new GameView(game)
+    this.view = new GameView(game)
     this.container = document.createElement('div')
     document.body.appendChild(container)
     view.draw(container)
@@ -31,6 +31,11 @@ describe('GameView', () => {
   describe('start', () => {
     it('shows the start button', () => {
       expect(document.body.innerHTML).toContain("Start")
+    })
+
+    it('shows the players cards when the start button is clicked', () => {
+      startButton = view.startButton().click()
+      expect(document.body.innerHTML).toContain("Your hand")
     })
   })
 })

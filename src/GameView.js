@@ -11,17 +11,17 @@ class GameView {
     const markup = `
       <h1>Welcome to Go Fish!</h1>
     `
-    + this.drawPlayers() + this.drawBots()
+    + this.playerList() + this.botList() + this.startButton()
 
     const element = document.createElement('div')
     element.innerHTML = markup
-    element.appendChild(this.drawStartButton())
     container.innerHTML = ''
     container.appendChild(element)
+    document.getElementById('start').onclick = this.game().start.bind(this.game())
     return element
   }
 
-  drawPlayers() {
+  playerList() {
     return `
       <h2>Players</h2>
       <ul>
@@ -30,7 +30,7 @@ class GameView {
     `
   }
 
-  drawBots() {
+  botList() {
     return `
       <h2>Bots</h2>
       <ul>
@@ -39,10 +39,9 @@ class GameView {
     `
   }
 
-  drawStartButton() {
-    let button = document.createElement('button')
-    button.innerHTML = "Start"
-    button.onclick = this.game().start
-    return button
+  startButton() {
+    return `
+      <button id="start">Start</button>
+    `
   }
 }

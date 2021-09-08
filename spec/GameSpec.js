@@ -16,4 +16,22 @@ describe('Game', () => {
     expect(game.bots()[2].name()).toEqual('IBot')
     expect(game.bots().length).toEqual(3)
   })
+
+  describe('#deal', () => {
+    beforeEach(() => {
+      game.deal()
+      this.number_of_cards_dealt = 5
+    })
+
+    it('gives each player 5 cards', () => {
+      expect(game.players()[0].cardsLeft()).toEqual(number_of_cards_dealt)
+      expect(game.players()[1].cardsLeft()).toEqual(number_of_cards_dealt)
+    })
+
+    it('gives each bot 5 cards', () => {
+      expect(game.bots()[0].cardsLeft()).toEqual(number_of_cards_dealt)
+      expect(game.bots()[1].cardsLeft()).toEqual(number_of_cards_dealt)
+      expect(game.bots()[2].cardsLeft()).toEqual(number_of_cards_dealt)
+    })
+  })
 })

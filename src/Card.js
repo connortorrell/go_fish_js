@@ -1,4 +1,5 @@
-const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+const RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+const SUITS = ['H', 'D', 'C', 'S']
 
 class Card {
   constructor(rank, suit) {
@@ -15,6 +16,6 @@ class Card {
   }
 
   value(){
-    return ranks.indexOf(this.rank())
+    return RANKS.indexOf(this.rank())
   }
 }
