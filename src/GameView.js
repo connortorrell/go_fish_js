@@ -7,21 +7,25 @@ class GameView {
     return this._game
   }
 
+  startButton() {
+    return document.getElementById('start')
+  }
+
   draw(container) {
     const markup = `
       <h1>Welcome to Go Fish!</h1>
     `
-    + this.playerList() + this.botList() + this.startButton()
+    + this.drawPlayerList() + this.drawBotList() + this.drawStartButton()
 
     const element = document.createElement('div')
     element.innerHTML = markup
     container.innerHTML = ''
     container.appendChild(element)
-    document.getElementById('start').onclick = this.game().start.bind(this.game())
+    this.startButton().onclick = this.game().start.bind(this.game())
     return element
   }
 
-  playerList() {
+  drawPlayerList() {
     return `
       <h2>Players</h2>
       <ul>
@@ -30,7 +34,7 @@ class GameView {
     `
   }
 
-  botList() {
+  drawBotList() {
     return `
       <h2>Bots</h2>
       <ul>
@@ -39,9 +43,9 @@ class GameView {
     `
   }
 
-  startButton() {
+  drawStartButton() {
     return `
-      <button id="start">Start</button>
+    <button id="start">Start</button>
     `
   }
 }

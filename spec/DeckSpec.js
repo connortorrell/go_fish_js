@@ -7,6 +7,15 @@ describe('Deck', () => {
     expect(deck.cards().length).toEqual(52)
   })
 
+  describe('#shuffle', () => {
+    it('mixes up the cards in the deck', () => {
+      deck2 = new Deck
+      deck.shuffle()
+      deck2.shuffle()
+      expect(deck).not.toEqual(deck2)
+    })
+  })
+
   describe('#cardsLeft', () => {
     it('returns the correct number of cards left', () => {
       expect(deck.cardsLeft()).toEqual(52)
