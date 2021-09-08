@@ -10,22 +10,31 @@ class GameView {
   draw(container) {
     const markup = `
       <h1>Welcome to Go Fish!</h1>
-
-      <h2>Players</h2>
-      <ul>
-        ${this.game().players().map(player => `<li>${player.name()}</li>`).join('')}
-      </ul>
-
-      <h2>Bots</h2>
-      <ul>
-        ${this.game().bots().map(bot => `<li>${bot.name()}</li>`).join('')}
-      </ul>
     `
+    + this.drawPlayers() + this.drawBots()
 
     const element = document.createElement('div')
     element.innerHTML = markup
     container.innerHTML = ''
     container.appendChild(element)
     return element
+  }
+
+  drawPlayers() {
+    return `
+      <h2>Players</h2>
+      <ul>
+        ${this.game().players().map(player => `<li>${player.name()}</li>`).join('')}
+      </ul>
+    `
+  }
+
+  drawBots() {
+    return `
+      <h2>Bots</h2>
+      <ul>
+        ${this.game().bots().map(bot => `<li>${bot.name()}</li>`).join('')}
+      </ul>
+    `
   }
 }
