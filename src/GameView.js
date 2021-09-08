@@ -11,7 +11,7 @@ class GameView {
     const markup = `
       <h1>Welcome to Go Fish!</h1>
     `
-    + this.drawPlayers() + this.drawBots()
+    + this.drawPlayers() + this.drawBots() + this.drawStartButton()
 
     const element = document.createElement('div')
     element.innerHTML = markup
@@ -35,6 +35,12 @@ class GameView {
       <ul>
         ${this.game().bots().map(bot => `<li>${bot.name()}</li>`).join('')}
       </ul>
+    `
+  }
+
+  drawStartButton() {
+    return `
+      <button onclick="this.game().start()">Start</button>
     `
   }
 }
