@@ -1,14 +1,16 @@
 describe('Card', () => {
-  it('creates with rank and suit', () => {
-    let card = new Card('A', 'S')
+  beforeEach(() => {
+    this.rank = 'A'
+    this.suit = 'S'
+    this.card = new Card(rank, suit)
+  })
 
-    expect(card.rank()).toEqual('A')
-    expect(card.suit()).toEqual('S')
+  it('creates with rank and suit', () => {
+    expect(card.rank()).toEqual(rank)
+    expect(card.suit()).toEqual(suit)
   })
 
   it('returns correct value', () => {
-    let card = new Card('5', 'S')
-
-    expect(card.value()).toEqual(3)
+    expect(card.value()).toEqual(12)
   })
 })

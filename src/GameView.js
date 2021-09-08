@@ -13,7 +13,12 @@ class GameView {
 
       <h2>Players</h2>
       <ul>
-        ${this.game().players().map(player => `<li>${player.name()}</li>`).join()}
+        ${this.game().players().map(player => `<li>${player.name()}</li>`).join('')}
+      </ul>
+
+      <h2>Bots</h2>
+      <ul>
+        ${this.game().bots().map(bot => `<li>${bot.name()}</li>`).join('')}
       </ul>
     `
 

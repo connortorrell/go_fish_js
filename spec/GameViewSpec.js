@@ -1,16 +1,30 @@
 describe('GameView', () => {
   describe('lobby', () => {
-    it('calls the passed in function with logged in player name', () => {
-      const players = [new Player('Connor'), new Player('Jeremy')]
+    beforeEach(() => {
+      this.names = ['Player1', 'Player2']
+      const players = [new Player(names[0]), new Player(names[1])]
       const game = new Game(players)
       const view = new GameView(game)
-      const container = document.createElement('div')
+      this.container = document.createElement('div')
       document.body.appendChild(container)
       view.draw(container)
+    })
 
-      expect(document.body.innerHTML).toContain('Connor')
-      expect(document.body.innerHTML).toContain('Jeremy')
+    afterEach(() => {
       container.remove()
+    })
+
+    it('shows the players in the game', () => {
+      expect(document.body.innerHTML).toContain("Players")
+      expect(document.body.innerHTML).toContain(names[0])
+      expect(document.body.innerHTML).toContain(names[1])
+    })
+
+    it('shows the bots in the game', () => {
+      expect(document.body.innerHTML).toContain("Bots")
+      expect(document.body.innerHTML).toContain("BeepBot")
+      expect(document.body.innerHTML).toContain("ToyBot")
+      expect(document.body.innerHTML).toContain("IBot")
     })
   })
 })

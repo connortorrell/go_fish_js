@@ -7,10 +7,11 @@ describe('LoginView', () => {
       const container = document.createElement('div')
       document.body.appendChild(container)
       view.draw(container)
-      view.nameInput().value = 'Connor'
+      let name = 'Player1'
+      view.nameInput().value = name
       view.submitButton().click()
-      
-      expect(calledWith).toEqual('Connor')
+
+      expect(calledWith).toEqual(name)
       container.remove()
     })
   })

@@ -1,7 +1,8 @@
 describe('Player', () => {
   it('creates with name', () => {
-    let player = new Player('Connor')
+    let name = 'Player1'
+    let player = new Player(name)
 
-    expect(player.name()).toEqual('Connor')
+    expect(player.name()).toEqual(name)
   })
 })
