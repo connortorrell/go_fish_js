@@ -21,4 +21,8 @@ class Game {
     }
     this._bots = bots
   }
+
+  start() {
+    console.log("start")
+  }
 }
