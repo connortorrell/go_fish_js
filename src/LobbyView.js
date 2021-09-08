@@ -1,4 +1,4 @@
-class GameView {
+class LobbyView {
   constructor(game) {
     this._game = game
   }
@@ -11,30 +11,35 @@ class GameView {
     return document.getElementById('start')
   }
 
+  startGame() {
+    this.game().start()
+    const view = new GameView(game)
+  }
+
   draw(container) {
     const markup = `
       <h1>Welcome to Go Fish!</h1>
     `
-    + this.drawPlayerList() + this.drawBotList() + this.drawStartButton()
+    + this.drawPlayer() + this.drawBots() + this.drawStartButton()
 
     const element = document.createElement('div')
     element.innerHTML = markup
     container.innerHTML = ''
     container.appendChild(element)
-    this.startButton().onclick = this.game().start.bind(this.game())
+    this.startButton().onclick = this.startGame.bind(this)
     return element
   }
 
-  drawPlayerList() {
+  drawPlayer() {
     return `
-      <h2>Players</h2>
+      <h2>You</h2>
       <ul>
-        ${this.game().players().map(player => `<li>${player.name()}</li>`).join('')}
+        <li>${this.game().player().name()}</li>
       </ul>
     `
   }
 
-  drawBotList() {
+  drawBots() {
     return `
       <h2>Bots</h2>
       <ul>

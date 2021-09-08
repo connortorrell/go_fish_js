@@ -1,13 +1,11 @@
 describe('Game', () => {
   beforeEach(() => {
-    this.names = ['Player1', 'Player2']
-    this.game = new Game([new Player(names[0]), new Player(names[1])])
+    this.name = 'Player1'
+    this.game = new Game(new Player(name))
   })
 
-  it('creates with players', () => {
-    expect(game.players()[0].name()).toEqual(names[0])
-    expect(game.players()[1].name()).toEqual(names[1])
-    expect(game.players().length).toEqual(2)
+  it('creates with a player', () => {
+    expect(game.player().name()).toEqual(name)
   })
 
   it('creates bots', () => {
@@ -23,9 +21,8 @@ describe('Game', () => {
       this.number_of_cards_dealt = 5
     })
 
-    it('gives each player 5 cards', () => {
-      expect(game.players()[0].cardsLeft()).toEqual(number_of_cards_dealt)
-      expect(game.players()[1].cardsLeft()).toEqual(number_of_cards_dealt)
+    it('gives the player 5 cards', () => {
+      expect(game.player().cardsLeft()).toEqual(number_of_cards_dealt)
     })
 
     it('gives each bot 5 cards', () => {

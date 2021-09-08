@@ -2,14 +2,14 @@ const BOT_NAMES = ['BeepBot', 'ToyBot', 'IBot']
 const STARTING_HAND_COUNT = 5
 
 class Game {
-  constructor(players, number_of_bots = 3) {
-    this._players = players
+  constructor(player, number_of_bots = 3) {
+    this._player = player
     this.createBots(number_of_bots)
     this._deck = new Deck
   }
 
-  players() {
-    return this._players
+  player() {
+    return this._player
   }
 
   bots() {
@@ -34,8 +34,9 @@ class Game {
 
   deal() {
     for(let i = 0; i < STARTING_HAND_COUNT; i++) {
-      this.players().forEach(player => player.take(this.deck().deal()))
+      this.player().take(this.deck().deal())
       this.bots().forEach(bot => bot.take(this.deck().deal()))
     }
+    console.log(this.player())
   }
 }
