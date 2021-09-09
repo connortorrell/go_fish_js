@@ -8,7 +8,11 @@ class GameView {
   }
 
   draw(container) {
-    const markup = this.titleMarkup() + this.handMarkup() + this.opponentsMarkup()
+    const markup = `
+      ${this.titleMarkup()}
+      ${this.handMarkup()}
+      ${this.opponentsMarkup()}
+    `
 
     const element = document.createElement('div')
     element.innerHTML = markup

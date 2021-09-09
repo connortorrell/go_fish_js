@@ -1,10 +1,16 @@
 class LobbyView {
-  constructor(game) {
+  constructor(game, onStart) {
     this._game = game
+    this.onStart = onStart
   }
 
   game() {
     return this._game
+  }
+
+  onClick(event) {
+    event.preventDefault()
+    this.onStart(this.game())
   }
 
   container() {
@@ -15,27 +21,20 @@ class LobbyView {
     return document.getElementById('start')
   }
 
-  startGame() {
-    this.game().start()
-    const view = new GameView(this.game())
-    view.draw(this.container())
-  }
-
   draw(container) {
-    const markup = this.titleMarkup() + this.playerMarkup() + this.botsMarkup() + this.startButtonMarkup()
+    const markup = `
+      <h1>Welcome to Go Fish!</h1>
+      ${this.playerMarkup()}
+      ${this.botsMarkup()}
+      ${this.startButtonMarkup()}
+    `
 
     const element = document.createElement('div')
     element.innerHTML = markup
     container.innerHTML = ''
     container.appendChild(element)
-    this.startButton().onclick = this.startGame.bind(this)
+    this.startButton().onclick = this.onClick.bind(this)
     return element
-  }
-
-  titleMarkup() {
-    return `
-      <h1>Welcome to Go Fish!</h1>
-    `
   }
 
   playerMarkup() {

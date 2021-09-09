@@ -13,23 +13,20 @@ class PlayView {
   }
 
   playButton() {
-    return document.getElementById('submit')
+    return document.getElementById('play')
   }
 
   draw(container) {
-    const markup = this.titleMarkup() + this.formMarkup()
+    const markup = `
+      <h1>Go Fish</h1>
+      ${this.formMarkup()}
+    `
 
     const element = document.createElement('div')
     element.innerHTML = markup
-    element.onsubmit = this.onSubmit.bind(this)
     container.appendChild(element)
+    element.onsubmit = this.onSubmit.bind(this)
     return element
-  }
-
-  titleMarkup() {
-    return `
-      <h1>Go Fish</h1>
-    `
   }
 
   formMarkup() {
@@ -38,7 +35,7 @@ class PlayView {
         <label for="name">Name</label>
         <input id="name" type="text" required>
 
-        <input id="submit" type="submit" value="Play">
+        <input id="play" type="submit" value="Play">
       </form>
     `
   }
