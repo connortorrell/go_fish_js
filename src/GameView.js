@@ -38,7 +38,7 @@ class GameView {
       <h2>Opponents</h2>
 
       <ul>
-        ${this.game().bots().map(bot => `<li>${bot.name()}</li>`).join('')}
+        ${this.game().bots().map(bot => `<li><strong>${bot.name()}</strong> | Cards left: ${bot.cardsLeft()}</li>`).join('')}
       </ul>
     `
   }

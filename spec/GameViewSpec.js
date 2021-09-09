@@ -28,6 +28,7 @@ describe('GameView', () => {
     expect(document.body.innerHTML).toContain("Opponents")
     game.bots().forEach(bot => {
       expect(document.body.innerHTML).toContain(bot.name())
+      expect(document.body.innerHTML).toContain("Cards left: " + bot.cardsLeft())
     })
   })
 })
