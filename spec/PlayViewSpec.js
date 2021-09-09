@@ -13,4 +13,17 @@ describe('PlayView', () => {
     expect(calledWith).toEqual(name)
     container.remove()
   })
+
+  it('does not call the passed in function when no name is given', () => {
+    let calledWith
+    const onPlay = (name) => { calledWith = name }
+    const view = new PlayView(onPlay)
+    const container = document.createElement('div')
+    document.body.appendChild(container)
+    view.draw(container)
+    view.playButton().click()
+
+    expect(calledWith).not.toEqual(name)
+    container.remove()
+  })
 })
