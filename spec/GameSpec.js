@@ -1,6 +1,7 @@
 describe('Game', () => {
+  const name = 'Player1'
+
   beforeEach(() => {
-    this.name = 'Player1'
     this.game = new Game(new Player(name))
   })
 
@@ -15,10 +16,16 @@ describe('Game', () => {
     expect(game.bots().length).toEqual(3)
   })
 
+  it('creates a deck', () => {
+    expect(game.deck()).not.toBeNull()
+    expect(game.deck().cardsLeft()).toEqual(52)
+  })
+
   describe('#deal', () => {
+    const number_of_cards_dealt = 5
+
     beforeEach(() => {
       game.deal()
-      this.number_of_cards_dealt = 5
     })
 
     it('gives the player 5 cards', () => {

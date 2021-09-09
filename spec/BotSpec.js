@@ -1,6 +1,7 @@
 describe('Bot', () => {
+  const name = 'Bot1'
+
   beforeEach(() => {
-    this.name = 'Bot1'
     this.bot = new Bot(name)
   })
 

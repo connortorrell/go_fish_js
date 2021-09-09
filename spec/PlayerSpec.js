@@ -1,6 +1,7 @@
 describe('Player', () => {
+  const name = 'Player1'
+
   beforeEach(() => {
-    this.name = 'Player1'
     this.player = new Player(name)
   })
 

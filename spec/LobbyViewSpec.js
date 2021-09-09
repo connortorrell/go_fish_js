@@ -1,6 +1,7 @@
 describe('LobbyView', () => {
+  const name = 'Player1'
+
   beforeEach(() => {
-    this.names = 'Player1'
     const player = new Player(name)
     const game = new Game(player)
     this.view = new LobbyView(game)

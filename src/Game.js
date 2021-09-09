@@ -24,6 +24,7 @@ class Game {
     this._bots = [...Array(number_of_bots)].map((_, i) => new Bot(BOT_NAMES[i]))
   }
 
+  // TODO: write test for this when turns are implemented
   start() {
     this.deal()
   }
