@@ -1,5 +1,6 @@
 describe('Game', () => {
   const name = 'Player1'
+  const bot_names = ["BeepBot", "ToyBot", 'IBot']
 
   beforeEach(() => {
     this.game = new Game(new Player(name))
@@ -10,9 +11,9 @@ describe('Game', () => {
   })
 
   it('creates bots', () => {
-    expect(game.bots()[0].name()).toEqual('BeepBot')
-    expect(game.bots()[1].name()).toEqual('ToyBot')
-    expect(game.bots()[2].name()).toEqual('IBot')
+    game.bots().forEach((bot, i) => {
+      expect(bot.name()).toEqual(bot_names[i])
+    })
     expect(game.bots().length).toEqual(3)
   })
 
@@ -33,9 +34,9 @@ describe('Game', () => {
     })
 
     it('gives each bot 5 cards', () => {
-      expect(game.bots()[0].cardsLeft()).toEqual(number_of_cards_dealt)
-      expect(game.bots()[1].cardsLeft()).toEqual(number_of_cards_dealt)
-      expect(game.bots()[2].cardsLeft()).toEqual(number_of_cards_dealt)
+      game.bots().forEach(bot => {
+        expect(bot.cardsLeft()).toEqual(number_of_cards_dealt)
+      })
     })
   })
 })

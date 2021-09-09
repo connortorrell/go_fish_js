@@ -1,5 +1,6 @@
 describe('LobbyView', () => {
   const name = 'Player1'
+  const bot_names = ["BeepBot", "ToyBot", 'IBot']
 
   beforeEach(() => {
     const player = new Player(name)
@@ -21,9 +22,9 @@ describe('LobbyView', () => {
 
   it('shows the bots in the game', () => {
     expect(document.body.innerHTML).toContain("Bots")
-    expect(document.body.innerHTML).toContain("BeepBot")
-    expect(document.body.innerHTML).toContain("ToyBot")
-    expect(document.body.innerHTML).toContain("IBot")
+    bot_names.forEach(name => {
+      expect(document.body.innerHTML).toContain(name)
+    })
   })
 
   it('shows the start button', () => {

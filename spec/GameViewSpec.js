@@ -15,11 +15,8 @@ describe('GameView', () => {
 
   it('shows the players hand', () => {
     expect(document.body.innerHTML).toContain("Your hand")
-    // TODO: loop through here and other places of repetition
-    expect(document.body.innerHTML).toContain(player.hand()[0].rank())
-    expect(document.body.innerHTML).toContain(player.hand()[1].rank())
-    expect(document.body.innerHTML).toContain(player.hand()[2].rank())
-    expect(document.body.innerHTML).toContain(player.hand()[3].rank())
-    expect(document.body.innerHTML).toContain(player.hand()[4].rank())
+    player.hand().forEach(card => {
+      expect(document.body.innerHTML).toContain(card.rank())
+    })
   })
 })
