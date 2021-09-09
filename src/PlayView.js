@@ -1,18 +1,18 @@
-class LoginView {
-  constructor(onLogin) {
-    this.onLogin = onLogin
+class PlayView {
+  constructor(onPlay) {
+    this.onPlay = onPlay
   }
 
   onSubmit(event) {
     event.preventDefault();
-    this.onLogin(event.target.name.value)
+    this.onPlay(event.target.name.value)
   }
 
   nameInput() {
     return document.getElementById('name')
   }
 
-  submitButton() {
+  playButton() {
     return document.getElementById('submit')
   }
 
@@ -22,7 +22,7 @@ class LoginView {
         <label for="name">Name</label>
         <input id="name" type="text" required>
 
-        <input id="submit" type="submit" value="Login">
+        <input id="submit" type="submit" value="Play">
       </form>
     `
 

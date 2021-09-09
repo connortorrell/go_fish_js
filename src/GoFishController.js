@@ -3,8 +3,8 @@ class GoFishController {
     return document.getElementById('main')
   }
 
-  login() {
-    const view = new LoginView(this.joinGame.bind(this))
+  play() {
+    const view = new PlayView(this.joinGame.bind(this))
     view.draw(this.container())
   }
 
@@ -17,4 +17,4 @@ class GoFishController {
 }
 
 window.controller = new GoFishController();
-window.onload = controller.login.bind(window.controller)
+window.onload = controller.play.bind(window.controller)
