@@ -21,11 +21,7 @@ class Game {
   }
 
   createBots(number_of_bots) {
-    let bots = []
-    for(let i = 0; i < number_of_bots; i++) {
-      bots.push(new Bot(BOT_NAMES[i]))
-    }
-    this._bots = bots
+    this._bots = [...Array(number_of_bots)].map((_, i) => new Bot(BOT_NAMES[i]))
   }
 
   start() {
@@ -33,9 +29,9 @@ class Game {
   }
 
   deal() {
-    for(let i = 0; i < STARTING_HAND_COUNT; i++) {
+    [...Array(STARTING_HAND_COUNT)].forEach((_, i) => {
       this.player().take(this.deck().deal())
       this.bots().forEach(bot => bot.take(this.deck().deal()))
-    }
+    })
   }
 }
