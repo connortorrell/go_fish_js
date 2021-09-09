@@ -9,7 +9,12 @@ class GameView {
 
   onSubmit(event) {
     event.preventDefault();
-    this.game().play(event.target.rank.value, event.target.opponent.value)
+    this.game().playTurn(event.target.rank.value, event.target.opponentName.value)
+    this.draw(this.container())
+  }
+
+  container() {
+    return document.getElementById('main')
   }
 
   draw(container) {
@@ -59,7 +64,7 @@ class GameView {
       <h2>Opponents</h2>
 
       ${this.game().bots().map(bot => `
-        <input type="radio" id="${bot.name()}" name="opponent" value="${bot.name()}" required>
+        <input type="radio" id="${bot.name()}" name="opponentName" value="${bot.name()}" required>
         <label for="${bot.name()}">${bot.name()} (Cards left: ${bot.cardsLeft()})</label>
         <br>
       `).join('')}

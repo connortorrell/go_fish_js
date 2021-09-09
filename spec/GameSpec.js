@@ -22,6 +22,28 @@ describe('Game', () => {
     expect(game.deck().cardsLeft()).toEqual(52)
   })
 
+  it('creates a turn index', () => {
+    expect(game.turnIndex()).toEqual(0)
+  })
+
+  describe('#turnPlayer', () => {
+    it('returns the player for the first turn player', () => {
+      expect(game.turnPlayer()).toEqual(game.player())
+    })
+
+    it('returns the bot when it is the bots turn', () => {
+      game.bots().forEach((bot, i) => {
+        game._turnIndex++
+        expect(game.turnPlayer()).toEqual(bot)
+      })
+    })
+
+    it('returns the player after the bots turns', () => {
+      game._turnIndex = 4
+      expect(game.turnPlayer()).toEqual(game.player())
+    })
+  })
+
   describe('#deal', () => {
     const number_of_cards_dealt = 5
 
@@ -36,6 +58,69 @@ describe('Game', () => {
     it('gives each bot 5 cards', () => {
       game.bots().forEach(bot => {
         expect(bot.cardsLeft()).toEqual(number_of_cards_dealt)
+      })
+    })
+  })
+
+  describe('#playTurn', () => {
+    beforeEach(() => {
+      game.deal()
+    })
+
+    it('ends turn if player asks wrong', () => {
+      game.playTurn('Y', game.bots()[0].name())
+      expect(game.turnIndex()).toBeGreaterThan(0)
+    })
+
+    it('does not end turn if player asks right', () => {
+      const askedRank = game.bots()[0].hand()[0].rank()
+      game.playTurn(askedRank, game.bots()[0].name())
+      expect(game.turnIndex()).toEqual(0)
+    })
+  })
+
+  describe('#playBotTurn', () => {
+    const number_of_cards_dealt = 5
+
+    beforeEach(() => {
+      game.deal()
+    })
+
+    it('ends turn if bot asks wrong', () => {
+      game._turnIndex++
+      game.bots()[0].hand()[0] = new Card('Y', "S")
+      game.playBotTurn()
+      expect(game.bots()[0].cardsLeft()).toBeGreaterThan(number_of_cards_dealt)
+    })
+
+    it('does not end turn if player asks right', () => {
+      game._turnIndex++
+      game.bots()[0].hand()[0] = game.player().hand()[0]
+      game.playBotTurn()
+      expect(game.bots()[0].cardsLeft()).toBeGreaterThan(number_of_cards_dealt + 1)
+    })
+  })
+
+  describe('#endTurn', () => {
+    beforeEach(() => {
+      game.bots().forEach(bot => bot.take(new Card('Y', 'S')))
+    })
+
+    it('gives the turn player a card from the deck', () => {
+      game.endTurn()
+      expect(game.player().cardsLeft()).toEqual(1)
+    })
+
+    it('increases the turn index', () => {
+      game.endTurn()
+      expect(game.turnIndex()).toBeGreaterThan(0)
+    })
+
+    it('goes through bot turns after the players turn', () => {
+      game.endTurn()
+      expect(game.turnIndex()).toEqual(4)
+      game.bots().forEach((bot, i) => {
+        expect(bot.cardsLeft()).toEqual(2)
       })
     })
   })

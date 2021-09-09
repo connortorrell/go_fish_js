@@ -37,4 +37,44 @@ describe('Player', () => {
       expect(player.hand()).toEqual(cards)
     })
   })
+
+  describe('#give', () => {
+    it('removes one card from hand', () => {
+      const card = new Card('A', 'S')
+      player.take(card)
+
+      expect(player.give('A')).toEqual([card])
+      expect(player.cardsLeft()).toEqual(0)
+    })
+
+    it('removes several cards from hand', () => {
+      const cards = [new Card('A', 'S'), new Card('A', 'C')]
+      player.take(cards)
+
+      expect(player.give('A')).toEqual(cards)
+      expect(player.cardsLeft()).toEqual(0)
+    })
+  })
+
+  describe('#ask', () => {
+    it('takes one card from another player', () => {
+      const card = new Card('A', 'S')
+      const player2 = new Player('Player2')
+      player2.take(card)
+      player.ask(player2, card.rank())
+
+      expect(player.hand()).toEqual([card])
+      expect(player2.cardsLeft()).toEqual(0)
+    })
+
+    it('takes several cards from another player', () => {
+      const cards = [new Card('A', 'S'), new Card('A', 'C')]
+      const player2 = new Player('Player2')
+      player2.take(cards)
+      player.ask(player2, cards[0].rank())
+
+      expect(player.hand()).toEqual(cards)
+      expect(player2.cardsLeft()).toEqual(0)
+    })
+  })
 })

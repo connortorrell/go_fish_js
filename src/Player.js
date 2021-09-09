@@ -17,6 +17,18 @@ class Player {
   }
 
   take(cards) {
-    this._hand = this._hand.concat(cards)
+    this._hand = this.hand().concat(cards)
+  }
+
+  give(rank) {
+    const matchingCards = this.hand().filter(card => card.rank() === rank)
+    this._hand = this.hand().filter(card => !matchingCards.includes(card))
+    return matchingCards
+  }
+
+  ask(opponent, rank) {
+    const cardsFished = opponent.give(rank)
+    this.take(cardsFished)
+    return cardsFished
   }
 }
