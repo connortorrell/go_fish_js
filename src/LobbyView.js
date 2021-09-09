@@ -22,10 +22,7 @@ class LobbyView {
   }
 
   draw(container) {
-    const markup = `
-      <h1>Welcome to Go Fish!</h1>
-    `
-    + this.drawPlayer() + this.drawBots() + this.drawStartButton()
+    const markup = this.titleMarkup() + this.playerMarkup() + this.botsMarkup() + this.startButtonMarkup()
 
     const element = document.createElement('div')
     element.innerHTML = markup
@@ -35,7 +32,13 @@ class LobbyView {
     return element
   }
 
-  drawPlayer() {
+  titleMarkup() {
+    return `
+      <h1>Welcome to Go Fish!</h1>
+    `
+  }
+
+  playerMarkup() {
     return `
       <h2>You</h2>
       <ul>
@@ -44,7 +47,7 @@ class LobbyView {
     `
   }
 
-  drawBots() {
+  botsMarkup() {
     return `
       <h2>Bots</h2>
       <ul>
@@ -53,7 +56,7 @@ class LobbyView {
     `
   }
 
-  drawStartButton() {
+  startButtonMarkup() {
     return `
     <button id="start">Start</button>
     `
