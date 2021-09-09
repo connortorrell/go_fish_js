@@ -35,4 +35,9 @@ class Game {
       this.bots().forEach(bot => bot.take(this.deck().deal()))
     })
   }
+
+  play(askedRank, askedOpponent) {
+    console.log(askedRank)
+    console.log(askedOpponent)
+  }
 }

@@ -18,4 +18,8 @@ class Card {
   value(){
     return RANKS.indexOf(this.rank())
   }
+
+  key() {
+    return `${this.rank()}-${this.suit()}`
+  }
 }

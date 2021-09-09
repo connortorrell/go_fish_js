@@ -14,7 +14,15 @@ describe('Card', () => {
     expect(card.suit()).toEqual(suit)
   })
 
-  it('returns correct value', () => {
-    expect(card.value()).toEqual(12)
+  describe('#value', () => {
+    it('returns correct value', () => {
+      expect(card.value()).toEqual(12)
+    })
+  })
+
+  describe('#key', () => {
+    it('returns correct key of rank-suit', () => {
+      expect(card.key()).toEqual('A-S')
+    })
   })
 })

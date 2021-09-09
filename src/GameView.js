@@ -7,17 +7,22 @@ class GameView {
     return this._game
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    this.game().play(event.target.rank.value, event.target.opponent.value)
+  }
+
   draw(container) {
     const markup = `
       ${this.titleMarkup()}
-      ${this.handMarkup()}
-      ${this.opponentsMarkup()}
+      ${this.formMarkup()}
     `
 
     const element = document.createElement('div')
     element.innerHTML = markup
     container.innerHTML = ''
     container.appendChild(element)
+    element.onsubmit = this.onSubmit.bind(this)
     return element
   }
 
@@ -27,13 +32,25 @@ class GameView {
     `
   }
 
+  formMarkup() {
+    return `
+      <form class="turn-form">
+        ${this.handMarkup()}
+        ${this.opponentsMarkup()}
+        <input id="ask" type="submit" value="Ask">
+      </form>
+    `
+  }
+
   handMarkup() {
     return `
       <h2>Your hand</h2>
 
-      <ul>
-        ${this.game().player().hand().map(card => `<li>${card.rank()}</li>`).join('')}
-      </ul>
+      ${this.game().player().hand().map(card => `
+        <input type="radio" id="${card.key()}" name="rank" value="${card.rank()}" required>
+        <label for="${card.key()}">${card.rank()}</label>
+        <br>
+      `).join('')}
     `
   }
 
@@ -41,9 +58,11 @@ class GameView {
     return `
       <h2>Opponents</h2>
 
-      <ul>
-        ${this.game().bots().map(bot => `<li><strong>${bot.name()}</strong> | Cards left: ${bot.cardsLeft()}</li>`).join('')}
-      </ul>
+      ${this.game().bots().map(bot => `
+        <input type="radio" id="${bot.name()}" name="opponent" value="${bot.name()}" required>
+        <label for="${bot.name()}">${bot.name()} (Cards left: ${bot.cardsLeft()})</label>
+        <br>
+      `).join('')}
     `
   }
 }
