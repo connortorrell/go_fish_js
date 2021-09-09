@@ -28,9 +28,4 @@ describe('LobbyView', () => {
   it('shows the start button', () => {
     expect(document.body.innerHTML).toContain("Start")
   })
-
-  it('shows the players cards when the start button is clicked', () => {
-    startButton = view.startButton().click()
-    expect(document.body.innerHTML).toContain("Your hand")
-  })
 })

@@ -37,6 +37,5 @@ class Game {
       this.player().take(this.deck().deal())
       this.bots().forEach(bot => bot.take(this.deck().deal()))
     }
-    console.log(this.player())
   }
 }

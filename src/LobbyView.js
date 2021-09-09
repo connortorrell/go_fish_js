@@ -7,13 +7,18 @@ class LobbyView {
     return this._game
   }
 
+  container() {
+    return document.getElementById('main')
+  }
+
   startButton() {
     return document.getElementById('start')
   }
 
   startGame() {
     this.game().start()
-    const view = new GameView(game)
+    const view = new GameView(this.game())
+    view.draw(this.container())
   }
 
   draw(container) {
