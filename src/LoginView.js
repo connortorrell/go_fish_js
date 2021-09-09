@@ -20,7 +20,7 @@ class LoginView {
     const formMarkup = `
       <form class="user-form">
         <label for="name">Name</label>
-        <input type="text" id="name" />
+        <input id="name" type="text" required>
 
         <input id="submit" type="submit" value="Login">
       </form>
