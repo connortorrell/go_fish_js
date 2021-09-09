@@ -4,7 +4,7 @@ describe('LobbyView', () => {
   beforeEach(() => {
     const player = new Player(name)
     const game = new Game(player)
-    this.view = new LobbyView(game)
+    const view = new LobbyView(game)
     this.container = document.createElement('div')
     document.body.appendChild(container)
     view.draw(container)
