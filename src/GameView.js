@@ -19,7 +19,7 @@ class GameView {
 
   draw(container) {
     const markup = `
-      ${this.titleMarkup()}
+      <h1>Your turn!</h1>
       ${this.formMarkup()}
     `
 
@@ -29,12 +29,6 @@ class GameView {
     container.appendChild(element)
     element.onsubmit = this.onSubmit.bind(this)
     return element
-  }
-
-  titleMarkup() {
-    return `
-      <h1>Your turn!</h1>
-    `
   }
 
   formMarkup() {
