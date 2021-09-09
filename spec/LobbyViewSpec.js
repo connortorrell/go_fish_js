@@ -29,4 +29,17 @@ describe('LobbyView', () => {
   it('shows the start button', () => {
     expect(document.body.innerHTML).toContain("Start")
   })
+
+  it('calls the passed in function with logged in player name', () => {
+    let calledWith
+    const onStart = (name) => { calledWith = name }
+    const view = new LobbyView(game, onStart)
+    const container = document.createElement('div')
+    document.body.appendChild(container)
+    view.draw(container)
+    view.startButton().click()
+
+    expect(calledWith).toEqual(game)
+    container.remove()
+  })
 })
