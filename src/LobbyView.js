@@ -57,7 +57,7 @@ class LobbyView {
 
   startButtonMarkup() {
     return `
-    <button id="start">Start</button>
+      <button id="start">Start</button>
     `
   }
 }

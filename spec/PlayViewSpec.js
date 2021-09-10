@@ -24,6 +24,7 @@ describe('PlayView', () => {
     view.playButton().click()
 
     expect(calledWith).not.toEqual(name)
+    expect(view.nameInput().checkValidity()).toEqual(false)
     container.remove()
   })
 })

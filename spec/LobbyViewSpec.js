@@ -30,9 +30,9 @@ describe('LobbyView', () => {
     expect(document.body.innerHTML).toContain("Start")
   })
 
-  it('calls the passed in function with logged in player name', () => {
+  it('calls the passed in function with the game', () => {
     let calledWith
-    const onStart = (name) => { calledWith = name }
+    const onStart = (game) => { calledWith = game }
     const view = new LobbyView(game, onStart)
     const container = document.createElement('div')
     document.body.appendChild(container)
