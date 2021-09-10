@@ -70,12 +70,14 @@ describe('Game', () => {
     it('ends turn if player asks wrong', () => {
       game.playTurn(game.bots()[0].name(), 'Y')
       expect(game.turnIndex()).toBeGreaterThan(0)
+      expect(game.results().length).toBeGreaterThan(0)
     })
 
     it('does not end turn if player asks right', () => {
       const askedRank = game.bots()[0].hand()[0].rank()
       game.playTurn(game.bots()[0].name(), askedRank)
       expect(game.turnIndex()).toEqual(0)
+      expect(game.results().length).toEqual(1)
     })
   })
 
@@ -91,9 +93,11 @@ describe('Game', () => {
       game.bots()[0].hand()[0] = new Card('Y', "S")
       game.playBotTurn()
       expect(game.bots()[0].cardsLeft()).toBeGreaterThan(number_of_cards_dealt)
+      expect(game.turnIndex()).toBeGreaterThan(1)
+      expect(game.results().length).toBeGreaterThan(0)
     })
 
-    it('does not end turn if player asks right', () => {
+    it('gives bot cards when bot asks right', () => {
       game._turnIndex++
       game.bots()[0].hand()[0] = game.player().hand()[0]
       game.playBotTurn()
@@ -116,12 +120,18 @@ describe('Game', () => {
       expect(game.turnIndex()).toBeGreaterThan(0)
     })
 
-    it('goes through bot turns after the players turn', () => {
+    it('adds the players result to results', () => {
+      game.endTurn()
+      expect(game.results().length).toBeGreaterThan(0)
+    })
+
+    it('goes through bot turns after the players turn and add results', () => {
       game.endTurn()
       expect(game.turnIndex()).toEqual(4)
       game.bots().forEach((bot, i) => {
         expect(bot.cardsLeft()).toEqual(2)
       })
+      expect(game.results().length).toEqual(4)
     })
   })
 })
