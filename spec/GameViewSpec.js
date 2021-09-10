@@ -47,4 +47,30 @@ describe('GameView', () => {
 
     expect(view.rankRadioButtons().length).toBeGreaterThan(number_of_cards_dealt + 1)
   })
+
+  it('does not ask if no rank is selected', () => {
+    const opponent = game.bots()[0]
+    const card = game.player().hand()[0]
+
+    view.radioButton(opponent.name()).click()
+
+    expect(view.radioButton(card.key()).checkValidity()).toEqual(false)
+
+    view.askButton().click()
+
+    expect(view.rankRadioButtons().length).toEqual(number_of_cards_dealt)
+  })
+
+  it('does not ask if no opponent is selected', () => {
+    const opponent = game.bots()[0]
+    const card = game.player().hand()[0]
+
+    view.radioButton(card.key()).click()
+
+    expect(view.radioButton(opponent.name()).checkValidity()).toEqual(false)
+
+    view.askButton().click()
+
+    expect(view.rankRadioButtons().length).toEqual(number_of_cards_dealt)
+  })
 })
