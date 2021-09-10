@@ -63,7 +63,7 @@ describe('GameView', () => {
     view.radioButton(bot.name()).click()
     view.askButton().click()
 
-    expect(container.innerHTML).toContain(`<strong>Turn 1: Player1 asked ${bot.name()} for a ${botCard.rank()} and received 1</strong>`)
+    expect(container.innerHTML).toContain(`<strong>Turn 1: Player1 asked ${bot.name()} for a ${botCard.rank()} and received`)
   })
 
   it('does not ask if no rank is selected', () => {
