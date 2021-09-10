@@ -18,6 +18,10 @@ class Game {
     return this._bots
   }
 
+  players() {
+    return [this.player(), ...this.bots()]
+  }
+
   deck() {
     return this._deck
   }
@@ -30,9 +34,13 @@ class Game {
     return this._results
   }
 
+  roundResults() {
+    const lastResult = this.results()[this.results().length - 1]
+    return this.results().filter(result => lastResult.drewCard() ? this.turnIndex() - result.turnIndex() < this.players().length : (this.turnIndex() + 1) - result.turnIndex() < this.players().length)
+  }
+
   turnPlayer() {
-    const allPlayers = [this.player()].concat(this.bots())
-    return allPlayers[this.turnIndex() % allPlayers.length]
+    return this.players()[this.turnIndex() % this.players().length]
   }
 
   createBots(number_of_bots) {

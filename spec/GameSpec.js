@@ -134,4 +134,16 @@ describe('Game', () => {
       expect(game.results().length).toEqual(4)
     })
   })
+
+  describe('#roundResults', () => {
+    beforeEach(() => {
+      game.start()
+      game.endTurn() // allow bots to all take turns
+    })
+
+    it('only returns results from the most recent round', () => {
+      game.endTurn()
+      expect(game.roundResults().length).toEqual(game.players().length)
+    })
+  })
 })
