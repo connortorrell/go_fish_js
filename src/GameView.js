@@ -33,6 +33,7 @@ class GameView {
     const markup = `
       <h1>Your turn!</h1>
       ${this.formMarkup()}
+      ${this.resultMarkup()}
     `
 
     const element = document.createElement('div')
@@ -74,6 +75,14 @@ class GameView {
         <label for="${bot.name()}">${bot.name()} (Cards left: ${bot.cardsLeft()})</label>
         <br>
       `).join('')}
+    `
+  }
+
+  resultMarkup() {
+    return `
+      <h2>Results</h2>
+
+      ${this.game().lastResult()}
     `
   }
 }

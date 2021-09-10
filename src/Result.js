@@ -26,4 +26,16 @@ class Result {
   cardsFished() {
     return this._cardsFished
   }
+
+  drewCard() {
+    return !Array.isArray(this.cardsFished())
+  }
+
+  message() {
+    if(this.drewCard()) {
+      return "drew card"
+    } else {
+      return "fished card"
+    }
+  }
 }
