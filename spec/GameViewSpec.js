@@ -53,6 +53,19 @@ describe('GameView', () => {
     expect(view.rankRadioButtons().length).toBeGreaterThan(number_of_cards_dealt + 1)
   })
 
+  it('shows the result when a player asks correctly', () => {
+    const bot = game.bots()[0]
+    const botCard = bot.hand()[0]
+    game.player().take(botCard)
+    view.draw(container)
+
+    view.radioButton(botCard.key()).click()
+    view.radioButton(bot.name()).click()
+    view.askButton().click()
+
+    expect(container.innerHTML).toContain(`<strong>Turn 1: Player1 asked ${bot.name()} for a ${botCard.rank()} and received 1</strong>`)
+  })
+
   it('does not ask if no rank is selected', () => {
     const opponent = game.bots()[0]
     const card = game.player().hand()[0]
