@@ -8,14 +8,6 @@ class GameView {
     return this._game
   }
 
-  gameResults() {
-    if(this.game().results().length !== 0){
-      return this.game().results().reverse().map(result => result.turnPlayerName() == this.game().turnPlayer().name() ? `<li><strong>${result.message()}</strong></li>` : `<li>${result.message()}</li>`).join('')
-    } else {
-      return `<li>There are no results yet</li>`
-    }
-  }
-
   onSubmit(event) {
     event.preventDefault();
     this.onAsk(this.game(), event.target.opponentName.value, event.target.rank.value)
@@ -94,5 +86,13 @@ class GameView {
         ${this.gameResults()}
       </ul>
     `
+  }
+
+  gameResults() {
+    if(this.game().results().length !== 0){
+      return this.game().results().reverse().map(result => result.turnPlayerName() == this.game().turnPlayer().name() ? `<li><strong>${result.message()}</strong></li>` : `<li>${result.message()}</li>`).join('')
+    } else {
+      return `<li>There are no results yet</li>`
+    }
   }
 }
