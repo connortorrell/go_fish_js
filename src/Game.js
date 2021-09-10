@@ -57,7 +57,7 @@ class Game {
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponentName, askedRank)
     } else {
-      this._results.push(new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponentName, askedRank, cardsFished))
+      this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponentName, askedRank, cardsFished))
     }
   }
 
@@ -68,7 +68,7 @@ class Game {
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponent.name(), askedRank)
     } else {
-      this._results.push(new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponent.name(), askedRank, cardsFished))
+      this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponent.name(), askedRank, cardsFished))
       this.playBotTurn()
     }
   }
@@ -76,7 +76,7 @@ class Game {
   endTurn(askedOpponentName, askedRank) {
     const cardDrawn = this.deck().deal()
     this.turnPlayer().take(cardDrawn)
-    this._results.push(new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponentName, askedRank, cardDrawn))
+    this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponentName, askedRank, cardDrawn))
     this._turnIndex++
     if (this.turnPlayer().constructor.name === 'Bot') {
       this.playBotTurn()

@@ -33,9 +33,9 @@ class Result {
 
   message() {
     if(this.drewCard()) {
-      return `${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()}. Go fish ${this.turnPlayerName()}!`
+      return `Turn ${this.turnIndex()}: ${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()}. Go fish ${this.turnPlayerName()}!`
     } else {
-      return `${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()} and received ${this.cardsFished().length}`
+      return `Turn ${this.turnIndex()}: ${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()} and received ${this.cardsFished().length}`
     }
   }
 }
