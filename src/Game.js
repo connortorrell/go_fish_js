@@ -46,9 +46,10 @@ class Game {
     })
   }
 
-  playTurn(askedRank, askedOpponentName) {
+  playTurn(askedOpponentName, askedRank) {
     const askedOpponent = this.bots().find(bot => bot.name() === askedOpponentName)
     const cardsFished = this.player().ask(askedOpponent, askedRank)
+    this._result = new Result(this.turnIndex(), this.turnPlayer(), askedOpponentName, askedRank, cardsFished)
     if(cardsFished.length == 0) {
       this.endTurn()
     }

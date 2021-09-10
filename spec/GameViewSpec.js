@@ -5,7 +5,12 @@ describe('GameView', () => {
     this.player = new Player('Player1')
     this.game = new Game(player)
     game.start()
-    this.view = new GameView(game)
+    const onAsk = (game, askedOpponentName, askedRank) => {
+      game.playTurn(askedOpponentName, askedRank)
+      const view = new GameView(game, onAsk)
+      view.draw(view.container())
+    }
+    this.view = new GameView(game, onAsk)
     this.container = document.createElement('div')
     this.container.id = 'main'
     document.body.appendChild(container)

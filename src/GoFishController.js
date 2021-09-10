@@ -17,7 +17,13 @@ class GoFishController {
 
   startGame(game) {
     game.start()
-    const view = new GameView(game)
+    const view = new GameView(game, this.ask.bind(this))
+    view.draw(this.container())
+  }
+
+  ask(game, askedOpponentName, askedRank) {
+    game.playTurn(askedOpponentName, askedRank)
+    const view = new GameView(game, this.ask.bind(this))
     view.draw(this.container())
   }
 }

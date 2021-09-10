@@ -68,13 +68,13 @@ describe('Game', () => {
     })
 
     it('ends turn if player asks wrong', () => {
-      game.playTurn('Y', game.bots()[0].name())
+      game.playTurn(game.bots()[0].name(), 'Y')
       expect(game.turnIndex()).toBeGreaterThan(0)
     })
 
     it('does not end turn if player asks right', () => {
       const askedRank = game.bots()[0].hand()[0].rank()
-      game.playTurn(askedRank, game.bots()[0].name())
+      game.playTurn(game.bots()[0].name(), askedRank)
       expect(game.turnIndex()).toEqual(0)
     })
   })

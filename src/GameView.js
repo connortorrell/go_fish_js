@@ -1,6 +1,7 @@
 class GameView {
-  constructor(game) {
+  constructor(game, onAsk) {
     this._game = game
+    this.onAsk = onAsk
   }
 
   game() {
@@ -9,8 +10,7 @@ class GameView {
 
   onSubmit(event) {
     event.preventDefault();
-    this.game().playTurn(event.target.rank.value, event.target.opponentName.value)
-    this.draw(this.container())
+    this.onAsk(this.game(), event.target.opponentName.value, event.target.rank.value)
   }
 
   container() {
