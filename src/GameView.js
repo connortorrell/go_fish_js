@@ -17,6 +17,18 @@ class GameView {
     return document.getElementById('main')
   }
 
+  rankRadioButtons() {
+    return document.getElementsByName('rank')
+  }
+
+  radioButton(id) {
+    return document.getElementById(id)
+  }
+
+  askButton() {
+    return document.getElementById('ask')
+  }
+
   draw(container) {
     const markup = `
       <h1>Your turn!</h1>

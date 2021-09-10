@@ -1,10 +1,13 @@
 describe('GameView', () => {
+  const number_of_cards_dealt = 5
+
   beforeEach(() => {
     this.player = new Player('Player1')
     this.game = new Game(player)
     game.start()
-    const view = new GameView(game)
+    this.view = new GameView(game)
     this.container = document.createElement('div')
+    this.container.id = 'main'
     document.body.appendChild(container)
     view.draw(container)
   })
@@ -30,5 +33,18 @@ describe('GameView', () => {
       expect(document.body.innerHTML).toContain(bot.name())
       expect(document.body.innerHTML).toContain("Cards left: " + bot.cardsLeft())
     })
+  })
+
+  it('shows the fished card when a player asks correctly', () => {
+    const bot = game.bots()[0]
+    const botCard = bot.hand()[0]
+    game.player().take(botCard)
+    view.draw(container)
+
+    view.radioButton(botCard.key()).click()
+    view.radioButton(bot.name()).click()
+    view.askButton().click()
+
+    expect(view.rankRadioButtons().length).toBeGreaterThan(number_of_cards_dealt + 1)
   })
 })
