@@ -1,7 +1,7 @@
 class Result {
-  constructor(turnIndex, turnPlayer, askedOpponentName, askedRank, cardsFished) {
+  constructor(turnIndex, turnPlayerName, askedOpponentName, askedRank, cardsFished) {
     this._turnIndex = turnIndex
-    this._turnPlayer = turnPlayer
+    this._turnPlayerName = turnPlayerName
     this._askedOpponentName = askedOpponentName
     this._askedRank = askedRank
     this._cardsFished = cardsFished
@@ -11,8 +11,8 @@ class Result {
     return this._turnIndex
   }
 
-  turnPlayer() {
-    return this._turnPlayer
+  turnPlayerName() {
+    return this._turnPlayerName
   }
 
   askedOpponentName() {
@@ -33,9 +33,9 @@ class Result {
 
   message() {
     if(this.drewCard()) {
-      return "drew card"
+      return `${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()}. Go fish ${this.turnPlayerName()}!`
     } else {
-      return "fished card"
+      return `${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()} and received ${this.cardsFished().length}`
     }
   }
 }

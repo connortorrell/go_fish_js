@@ -7,6 +7,7 @@ class Game {
     this.createBots(number_of_bots)
     this._deck = new Deck
     this._turnIndex = 0
+    this._results = []
   }
 
   player() {
@@ -25,21 +26,13 @@ class Game {
     return this._turnIndex
   }
 
-  result() {
-    return this._result
+  results() {
+    return this._results
   }
 
   turnPlayer() {
     const allPlayers = [this.player()].concat(this.bots())
     return allPlayers[this.turnIndex() % allPlayers.length]
-  }
-
-  lastResult() {
-    if(this.result() !== undefined){
-      return this.result().message()
-    } else {
-      return "There are no results yet"
-    }
   }
 
   createBots(number_of_bots) {
@@ -64,7 +57,7 @@ class Game {
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponentName, askedRank)
     } else {
-      this._result = new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponentName, askedRank, cardsFished)
+      this._results.push(new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponentName, askedRank, cardsFished))
     }
   }
 
@@ -75,7 +68,7 @@ class Game {
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponent.name(), askedRank)
     } else {
-      this._result = new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponent.name(), askedRank, cardsFished)
+      this._results.push(new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponent.name(), askedRank, cardsFished))
       this.playBotTurn()
     }
   }
@@ -83,7 +76,7 @@ class Game {
   endTurn(askedOpponentName, askedRank) {
     const cardDrawn = this.deck().deal()
     this.turnPlayer().take(cardDrawn)
-    this._result = new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponentName, askedRank, cardDrawn)
+    this._results.push(new Result(this.turnIndex(), this.turnPlayer().name(), askedOpponentName, askedRank, cardDrawn))
     this._turnIndex++
     if (this.turnPlayer().constructor.name === 'Bot') {
       this.playBotTurn()
