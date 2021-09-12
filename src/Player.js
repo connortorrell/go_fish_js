@@ -1,7 +1,10 @@
+const bookLength = 4
+
 class Player {
   constructor(name) {
     this._name = name
     this._hand = []
+    this._books = 0
   }
 
   name() {
@@ -12,12 +15,17 @@ class Player {
     return this._hand
   }
 
+  books() {
+    return this._books
+  }
+
   cardsLeft() {
     return this.hand().length
   }
 
   take(cards) {
     this._hand = this.hand().concat(cards)
+    this.updateBooks()
   }
 
   give(rank) {
@@ -30,5 +38,15 @@ class Player {
     const cardsFished = opponent.give(rank)
     this.take(cardsFished)
     return cardsFished
+  }
+
+  updateBooks() {
+    RANKS.forEach(rank => {
+      const matches = this.hand().filter(card => card.rank() === rank)
+      if(matches.length === bookLength) {
+        this._hand = this.hand().filter(card => card.rank() !== rank)
+        this._books++
+      }
+    })
   }
 }

@@ -13,6 +13,10 @@ describe('Player', () => {
     expect(player.hand()).toEqual([])
   })
 
+  it('creates with 0 books', () => {
+    expect(player.books()).toEqual(0)
+  })
+
   describe('#cardsLeft', () => {
     it('returns correct number of cards left in the players hand', () => {
       const card = new Card('A', 'S')
@@ -75,6 +79,17 @@ describe('Player', () => {
 
       expect(player.hand()).toEqual(cards)
       expect(player2.cardsLeft()).toEqual(0)
+    })
+  })
+
+  describe('#updateBooks', () => {
+    it('adds a book and removes cards if player has all 4 suits of one rank', () => {
+      const cards = [new Card('A', 'S'), new Card('A', 'C'), new Card('A', 'H'), new Card('A', 'D')]
+      player.take(cards)
+      player.updateBooks()
+
+      expect(player.cardsLeft()).toEqual(0)
+      expect(player.books()).toEqual(1)
     })
   })
 })
