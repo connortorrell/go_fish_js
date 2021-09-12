@@ -22,6 +22,10 @@ describe('GameView', () => {
     container.remove()
   })
 
+  it('shows the number of cards left in the deck', () => {
+    expect(document.body.innerHTML).toContain("Cards left in the deck: 32")
+  })
+
   it('shows that it is the players turn on the first turn', () => {
     expect(document.body.innerHTML).toContain("Your turn")
   })
