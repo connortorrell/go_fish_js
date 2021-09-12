@@ -26,6 +26,10 @@ describe('Game', () => {
     expect(game.turnIndex()).toEqual(0)
   })
 
+  it('creates a results array', () => {
+    expect(game.results()).toEqual([])
+  })
+
   describe('#turnPlayer', () => {
     it('returns the player for the first turn player', () => {
       expect(game.turnPlayer()).toEqual(game.player())
@@ -143,7 +147,7 @@ describe('Game', () => {
 
     it('only returns results from the most recent round', () => {
       game.endTurn()
-      expect(game.roundResults().length).toEqual(game.players().length)
+      expect(game.roundResults().length).toBeGreaterThanOrEqual(game.players().length)
     })
   })
 })
