@@ -1,12 +1,12 @@
 describe('Deck', () => {
-  const total_number_of_cards = 52
+  const totalNumberOfCards = 52
 
   beforeEach(() => {
     this.deck = new Deck
   })
 
   it('build the deck when created', () => {
-    expect(deck.cards().length).toEqual(total_number_of_cards)
+    expect(deck.cards().length).toEqual(totalNumberOfCards)
   })
 
   describe('#shuffle', () => {
@@ -20,7 +20,7 @@ describe('Deck', () => {
 
   describe('#cardsLeft', () => {
     it('returns the correct number of cards left', () => {
-      expect(deck.cardsLeft()).toEqual(total_number_of_cards)
+      expect(deck.cardsLeft()).toEqual(totalNumberOfCards)
     })
   })
 
@@ -35,7 +35,7 @@ describe('Deck', () => {
     it('removes the last card from the deck', () => {
       deck.deal()
 
-      expect(deck.cardsLeft()).toEqual(total_number_of_cards - 1)
+      expect(deck.cardsLeft()).toEqual(totalNumberOfCards - 1)
     })
   })
 })

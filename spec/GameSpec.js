@@ -49,19 +49,19 @@ describe('Game', () => {
   })
 
   describe('#deal', () => {
-    const number_of_cards_dealt = 5
+    const numberOfCardsDealt = 5
 
     beforeEach(() => {
       game.deal()
     })
 
     it('gives the player 5 cards', () => {
-      expect(game.player().cardsLeft()).toEqual(number_of_cards_dealt)
+      expect(game.player().cardsLeft()).toEqual(numberOfCardsDealt)
     })
 
     it('gives each bot 5 cards', () => {
       game.bots().forEach(bot => {
-        expect(bot.cardsLeft()).toEqual(number_of_cards_dealt)
+        expect(bot.cardsLeft()).toEqual(numberOfCardsDealt)
       })
     })
   })
@@ -86,7 +86,7 @@ describe('Game', () => {
   })
 
   describe('#playBotTurn', () => {
-    const number_of_cards_dealt = 5
+    const numberOfCardsDealt = 5
 
     beforeEach(() => {
       game.deal()
@@ -96,7 +96,7 @@ describe('Game', () => {
       game._turnIndex++
       game.bots()[0].hand()[0] = new Card('Y', "S")
       game.playBotTurn()
-      expect(game.bots()[0].cardsLeft()).toBeGreaterThan(number_of_cards_dealt)
+      expect(game.bots()[0].cardsLeft()).toBeGreaterThan(numberOfCardsDealt)
       expect(game.turnIndex()).toBeGreaterThan(1)
       expect(game.results().length).toBeGreaterThan(0)
     })
@@ -105,7 +105,9 @@ describe('Game', () => {
       game._turnIndex++
       game.bots()[0].hand()[0] = game.player().hand()[0]
       game.playBotTurn()
-      expect(game.bots()[0].cardsLeft()).toBeGreaterThan(number_of_cards_dealt + 1)
+
+      const bookLength = 4
+      expect(game.bots()[0].cardsLeft()).toBeGreaterThan((numberOfCardsDealt + 1) - (game.bots()[0].books() * bookLength))
     })
   })
 

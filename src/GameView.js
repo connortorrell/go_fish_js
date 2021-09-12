@@ -70,6 +70,8 @@ class GameView {
         <label for="${card.key()}">${card.rank()}</label>
         <br>
       `).join('')}
+
+      <p><strong>Books: ${this.game().player().books()}</strong></p>
     `
   }
 
@@ -79,7 +81,7 @@ class GameView {
 
       ${this.game().bots().map(bot => `
         <input type="radio" id="${bot.name()}" name="opponentName" value="${bot.name()}" required>
-        <label for="${bot.name()}">${bot.name()} (Cards left: ${bot.cardsLeft()})</label>
+        <label for="${bot.name()}">${bot.name()} (Cards left: ${bot.cardsLeft()}) (Books: ${bot.books()})</label>
         <br>
       `).join('')}
     `

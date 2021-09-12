@@ -1,5 +1,5 @@
 describe('GameView', () => {
-  const number_of_cards_dealt = 5
+  const numberOfCardsDealt = 5
 
   function onAsk(game, askedOpponentName, askedRank) {
     game.playTurn(askedOpponentName, askedRank)
@@ -34,6 +34,7 @@ describe('GameView', () => {
     expect(document.body.innerHTML).toContain("Your hand")
     player.hand().forEach(card => {
       expect(document.body.innerHTML).toContain(card.rank())
+      expect(document.body.innerHTML).toContain("Books: 0")
     })
   })
 
@@ -42,6 +43,7 @@ describe('GameView', () => {
     game.bots().forEach(bot => {
       expect(document.body.innerHTML).toContain(bot.name())
       expect(document.body.innerHTML).toContain("Cards left: " + bot.cardsLeft())
+      expect(document.body.innerHTML).toContain("Books: " + bot.books())
     })
   })
 
@@ -55,7 +57,8 @@ describe('GameView', () => {
     view.radioButton(bot.name()).click()
     view.askButton().click()
 
-    expect(view.rankRadioButtons().length).toBeGreaterThan(number_of_cards_dealt + 1)
+    const bookLength = 4
+    expect(view.rankRadioButtons().length).toBeGreaterThan((numberOfCardsDealt + 1) - (game.player().books() * bookLength))
   })
 
   it('shows the result when a player asks correctly', () => {
@@ -81,7 +84,7 @@ describe('GameView', () => {
 
     view.askButton().click()
 
-    expect(view.rankRadioButtons().length).toEqual(number_of_cards_dealt)
+    expect(view.rankRadioButtons().length).toEqual(numberOfCardsDealt)
   })
 
   it('does not ask if no opponent is selected', () => {
@@ -94,6 +97,6 @@ describe('GameView', () => {
 
     view.askButton().click()
 
-    expect(view.rankRadioButtons().length).toEqual(number_of_cards_dealt)
+    expect(view.rankRadioButtons().length).toEqual(numberOfCardsDealt)
   })
 })
