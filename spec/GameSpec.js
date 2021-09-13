@@ -157,9 +157,11 @@ describe('Game', () => {
       game.endTurn() // allow bots to all take turns
     })
 
-    it('only returns results from the most recent round', () => {
+    it('returns results from the most recent round', () => {
       game.endTurn()
       expect(game.roundResults().length).toBeGreaterThanOrEqual(game.players().length)
+      filteredRoundResults = game.roundResults().filter(result => game.turnIndex() - result.turnIndex() < game.players().length)
+      expect(filteredRoundResults.length).toEqual(game.roundResults().length)
     })
   })
 
