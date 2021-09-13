@@ -48,6 +48,24 @@ describe('Game', () => {
     })
   })
 
+  describe('#players', () => {
+    it('returns all the players', () => {
+      expect(game.players().includes(game.player())).toEqual(true)
+      game.bots().forEach(bot => {
+        expect(game.players().includes(bot)).toEqual(true)
+      })
+    })
+  })
+
+  describe('#opponents', () => {
+    it('returns all the players except the turnPlayer', () => {
+      expect(game.opponents().includes(game.player())).toEqual(false)
+      game.bots().forEach(bot => {
+        expect(game.opponents().includes(bot)).toEqual(true)
+      })
+    })
+  })
+
   describe('#deal', () => {
     const numberOfCardsDealt = 5
 
@@ -94,20 +112,21 @@ describe('Game', () => {
 
     it('ends turn if bot asks wrong', () => {
       game._turnIndex++
-      game.bots()[0].hand()[0] = new Card('Y', "S")
+      const bot = game.bots()[0]
+      bot._hand = [new Card('Y', "S")]
       game.playBotTurn()
-      expect(game.bots()[0].cardsLeft()).toBeGreaterThan(numberOfCardsDealt)
+      expect(bot.cardsLeft()).toBeGreaterThanOrEqual(1)
       expect(game.turnIndex()).toBeGreaterThan(1)
       expect(game.results().length).toBeGreaterThan(0)
     })
 
     it('gives bot cards when bot asks right', () => {
       game._turnIndex++
-      game.bots()[0].hand()[0] = game.player().hand()[0]
+      const bot = game.bots()[0]
+      bot._hand = [game.player().hand()[0]]
       game.playBotTurn()
 
-      const bookLength = 4
-      expect(game.bots()[0].cardsLeft()).toBeGreaterThan((numberOfCardsDealt + 1) - (game.bots()[0].books() * bookLength))
+      expect(bot.cardsLeft()).toBeGreaterThanOrEqual(1)
     })
   })
 
@@ -129,15 +148,6 @@ describe('Game', () => {
     it('adds the players result to results', () => {
       game.endTurn()
       expect(game.results().length).toBeGreaterThan(0)
-    })
-
-    it('goes through bot turns after the players turn and add results', () => {
-      game.endTurn()
-      expect(game.turnIndex()).toEqual(4)
-      game.bots().forEach((bot, i) => {
-        expect(bot.cardsLeft()).toEqual(2)
-      })
-      expect(game.results().length).toEqual(4)
     })
   })
 

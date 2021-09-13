@@ -18,12 +18,6 @@ describe('Deck', () => {
     })
   })
 
-  describe('#cardsLeft', () => {
-    it('returns the correct number of cards left', () => {
-      expect(deck.cardsLeft()).toEqual(totalNumberOfCards)
-    })
-  })
-
   describe('#deal', () => {
     it('returns the last card from the deck', () => {
       card = new Card('A', 'S')
@@ -36,6 +30,23 @@ describe('Deck', () => {
       deck.deal()
 
       expect(deck.cardsLeft()).toEqual(totalNumberOfCards - 1)
+    })
+  })
+
+  describe('#cardsLeft', () => {
+    it('returns the correct number of cards left', () => {
+      expect(deck.cardsLeft()).toEqual(totalNumberOfCards)
+    })
+  })
+
+  describe('#empty', () => {
+    it('returns false when the deck is not empty', () => {
+      expect(deck.empty()).toEqual(false)
+    })
+
+    it('returns true when the deck is empty', () => {
+      deck._cards = []
+      expect(deck.empty()).toEqual(true)
     })
   })
 })

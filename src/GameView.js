@@ -89,7 +89,7 @@ class GameView {
 
   resultsMarkup() {
     return `
-      <h2>Results</h2>
+      <h2>Round results</h2>
 
       <ul>
         ${this.gameResults()}

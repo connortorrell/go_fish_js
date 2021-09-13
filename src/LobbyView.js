@@ -26,7 +26,7 @@ class LobbyView {
       <h1>Welcome to Go Fish!</h1>
       ${this.playerMarkup()}
       ${this.botsMarkup()}
-      ${this.startButtonMarkup()}
+      <button id="start">Start</button>
     `
 
     const element = document.createElement('div')
@@ -52,12 +52,6 @@ class LobbyView {
       <ul>
         ${this.game().bots().map(bot => `<li>${bot.name()}</li>`).join('')}
       </ul>
-    `
-  }
-
-  startButtonMarkup() {
-    return `
-      <button id="start">Start</button>
     `
   }
 }

@@ -28,7 +28,7 @@ class Result {
   }
 
   drewCard() {
-    return !Array.isArray(this.cardsFished())
+    return !Array.isArray(this.cardsFished()) || this.cardsFished().length === 0
   }
 
   message() {

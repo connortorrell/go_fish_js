@@ -23,8 +23,13 @@ class GoFishController {
 
   ask(game, askedOpponentName, askedRank) {
     game.playTurn(askedOpponentName, askedRank)
-    const view = new GameView(game, this.ask.bind(this))
-    view.draw(this.container())
+    if(game.over()) {
+      const view = new GameOverView(game, this.play.bind(this))
+      view.draw(this.container())
+    } else {
+      const view = new GameView(game, this.ask.bind(this))
+      view.draw(this.container())
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 const BOT_NAMES = ['BeepBot', 'ToyBot', 'IBot']
 const STARTING_HAND_COUNT = 5
+const TOTAL_BOOKS = 13
 
 class Game {
   constructor(player, number_of_bots = 3) {
@@ -20,6 +21,10 @@ class Game {
 
   players() {
     return [this.player(), ...this.bots()]
+  }
+
+  opponents() {
+    return this.players().filter(player => player !== this.turnPlayer())
   }
 
   deck() {
@@ -47,7 +52,6 @@ class Game {
     this._bots = [...Array(number_of_bots)].map((_, i) => new Bot(BOT_NAMES[i]))
   }
 
-  // TODO: write test for this when turns are implemented
   start() {
     this.deal()
   }
@@ -66,18 +70,19 @@ class Game {
       this.endTurn(askedOpponentName, askedRank)
     } else {
       this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponentName, askedRank, cardsFished))
+      this.startTurn()
     }
   }
 
   playBotTurn() {
-    const askedOpponent = this.player()
-    const askedRank = this.turnPlayer().hand()[0].rank()
+    const askedOpponent = this.turnPlayer().chooseOpponent(this.opponents())
+    const askedRank = this.turnPlayer().chooseRank()
     const cardsFished = this.turnPlayer().ask(askedOpponent, askedRank)
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponent.name(), askedRank)
     } else {
       this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponent.name(), askedRank, cardsFished))
-      this.playBotTurn()
+      this.startTurn()
     }
   }
 
@@ -85,9 +90,42 @@ class Game {
     const cardDrawn = this.deck().deal()
     this.turnPlayer().take(cardDrawn)
     this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponentName, askedRank, cardDrawn))
+    this.nextTurn()
+  }
+
+  nextTurn() {
     this._turnIndex++
-    if (this.turnPlayer().constructor.name === 'Bot') {
+    this.startTurn()
+  }
+
+  startTurn() {
+    if(this.turnPlayer().cardsLeft() === 0){
+      this.outOfCards()
+    } else if(this.turnPlayer().constructor.name === 'Bot') {
       this.playBotTurn()
     }
+  }
+
+  outOfCards() {
+    if(!this.over()) {
+      if(this.deck().empty()) {
+        this.nextTurn()
+      } else{
+        this.turnPlayer().take(this.deck().deal())
+        if(this.turnPlayer().constructor.name === 'Bot') {
+          this.playBotTurn()
+        }
+      }
+    }
+  }
+
+  over() {
+    let totalBooks = 0
+    this.players().forEach(player => totalBooks += player.books())
+    return totalBooks === TOTAL_BOOKS
+  }
+
+  standings() {
+    return this.players().sort((a, b) => b.books() - a.books())
   }
 }

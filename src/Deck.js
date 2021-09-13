@@ -18,11 +18,19 @@ class Deck {
     this.cards().sort(() => Math.random() - 0.5);
   }
 
+  deal() {
+    if(!this.empty()){
+      return this.cards().pop()
+    } else {
+      return []
+    }
+  }
+
   cardsLeft() {
     return this.cards().length
   }
 
-  deal() {
-    return this.cards().pop()
+  empty() {
+    return this.cardsLeft() === 0
   }
 }

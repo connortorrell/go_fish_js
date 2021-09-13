@@ -24,6 +24,7 @@ class PlayView {
 
     const element = document.createElement('div')
     element.innerHTML = markup
+    container.innerHTML = ''
     container.appendChild(element)
     element.onsubmit = this.onSubmit.bind(this)
     return element
