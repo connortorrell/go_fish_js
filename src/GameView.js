@@ -66,7 +66,7 @@ class GameView {
       <h2>Your hand</h2>
 
       ${this.game().player().hand().map(card => `
-        <input type="radio" id="${card.key()}" name="rank" value="${card.rank()}" required>
+        <input type="radio" id="${card.key()}" name="rank" value="${card.rank()}" checked>
         <label for="${card.key()}">${card.rank()}</label>
         <br>
       `).join('')}
@@ -80,7 +80,7 @@ class GameView {
       <h2>Opponents</h2>
 
       ${this.game().bots().map(bot => `
-        <input type="radio" id="${bot.name()}" name="opponentName" value="${bot.name()}" required>
+        <input type="radio" id="${bot.name()}" name="opponentName" value="${bot.name()}" checked>
         <label for="${bot.name()}">${bot.name()} (Cards left: ${bot.cardsLeft()}) (Books: ${bot.books()})</label>
         <br>
       `).join('')}

@@ -38,7 +38,7 @@ class GameOverView {
       <h2>Standings</h2>
 
       <ul>
-        ${this.game().standings().map(player => `<li>${player.name()} (Books: ${player.books()})</li>`).join('')}
+        ${this.game().standings().map(player => player === this.game().player() ? `<li><strong>${player.name()} (Books: ${player.books()})</strong></li>` : `<li>${player.name()} (Books: ${player.books()})</li>`).join('')}
       </ul>
     `
   }
@@ -48,16 +48,8 @@ class GameOverView {
       <h2>Round results</h2>
 
       <ul>
-        ${this.gameResults()}
+        ${this.game().roundResults().map(result => result.turnPlayer().name() == this.game().player().name() ? `<li><strong>${result.message()}</strong></li>` : `<li>${result.message()}</li>`).reverse().join('')}
       </ul>
     `
-  }
-
-  gameResults() {
-    if(this.game().results().length !== 0){
-      return this.game().roundResults().map(result => result.turnPlayer().name() == this.game().player().name() ? `<li><strong>${result.message()}</strong></li>` : `<li>${result.message()}</li>`).reverse().join('')
-    } else {
-      return `<li>There are no results yet</li>`
-    }
   }
 }
