@@ -162,4 +162,32 @@ describe('Game', () => {
       expect(game.roundResults().length).toBeGreaterThanOrEqual(game.players().length)
     })
   })
+
+  describe('#outOfCards', () => {
+    it('adds a card from the deck if the deck is not empty', () => {
+      game.outOfCards()
+      expect(game.turnPlayer().cardsLeft()).toEqual(1)
+    })
+  })
+
+  describe('#over', () => {
+    it('returns false when all the books are not made', () => {
+      expect(game.over()).toEqual(false)
+    })
+
+    it('returns true when all the books are made', () => {
+      game.player()._books = 13
+      expect(game.over()).toEqual(true)
+    })
+  })
+
+  describe('#standings', () => {
+    it('returns players in order of books', () => {
+      game.player()._books = 7
+      game.bots()[0]._books = 4
+      game.bots()[1]._books = 3
+      game.bots()[2]._books = 2
+      expect(game.standings()).toEqual([game.player(), game.bots()[0], game.bots()[1], game.bots()[2]])
+    })
+  })
 })
