@@ -4,17 +4,19 @@ describe('Result', () => {
   const askedRank = 'K'
 
   beforeEach(() => {
-    this.game = new Game(new Player(name))
+    this.player = new Player(name)
+    this.game = new Game(player)
+    game.deal()
     this.cardDrawn = game.deck().deal()
-    this.result = new Result(game.turnIndex() + 1, name, askedOpponentName, askedRank, cardDrawn)
+    this.result = new Result(game.turnIndex() + 1, player, askedOpponentName, askedRank, cardDrawn)
   })
 
   it('creates with a turn index', () => {
     expect(result.turnIndex()).toEqual(game.turnIndex() + 1)
   })
 
-  it('creates with a turn player name', () => {
-    expect(result.turnPlayerName()).toEqual(name)
+  it('creates with a turn player', () => {
+    expect(result.turnPlayer()).toEqual(player)
   })
 
   it('creates with an asked opponent name', () => {

@@ -1,18 +1,19 @@
 class Result {
-  constructor(turnIndex, turnPlayerName, askedOpponentName, askedRank, cardsFished) {
+  constructor(turnIndex, turnPlayer, askedOpponentName, askedRank, cardsFished, over) {
     this._turnIndex = turnIndex
-    this._turnPlayerName = turnPlayerName
+    this._turnPlayer = turnPlayer
     this._askedOpponentName = askedOpponentName
     this._askedRank = askedRank
     this._cardsFished = cardsFished
+    this._over = over
   }
 
   turnIndex() {
     return this._turnIndex
   }
 
-  turnPlayerName() {
-    return this._turnPlayerName
+  turnPlayer() {
+    return this._turnPlayer
   }
 
   askedOpponentName() {
@@ -27,15 +28,19 @@ class Result {
     return this._cardsFished
   }
 
+  over() {
+    return this._over
+  }
+
   drewCard() {
-    return !Array.isArray(this.cardsFished()) || this.cardsFished().length === 0
+    return (!Array.isArray(this.cardsFished()) || this.cardsFished().length === 0 || this.turnPlayer().cardsLeft() === 0) && !this.over()
   }
 
   message() {
     if(this.drewCard()) {
-      return `Turn ${this.turnIndex()}: ${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()}. Go fish ${this.turnPlayerName()}!`
+      return `Turn ${this.turnIndex()}: ${this.turnPlayer().name()} asked ${this.askedOpponentName()} for a ${this.askedRank()}. Go fish ${this.turnPlayer().name()}!`
     } else {
-      return `Turn ${this.turnIndex()}: ${this.turnPlayerName()} asked ${this.askedOpponentName()} for a ${this.askedRank()} and received ${this.cardsFished().length}`
+      return `Turn ${this.turnIndex()}: ${this.turnPlayer().name()} asked ${this.askedOpponentName()} for a ${this.askedRank()} and received ${this.cardsFished().length}`
     }
   }
 }

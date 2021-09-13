@@ -55,7 +55,7 @@ class GameOverView {
 
   gameResults() {
     if(this.game().results().length !== 0){
-      return this.game().roundResults().map(result => result.turnPlayerName() == this.game().turnPlayer().name() ? `<li><strong>${result.message()}</strong></li>` : `<li>${result.message()}</li>`).reverse().join('')
+      return this.game().roundResults().map(result => result.turnPlayer().name() == this.game().player().name() ? `<li><strong>${result.message()}</strong></li>` : `<li>${result.message()}</li>`).reverse().join('')
     } else {
       return `<li>There are no results yet</li>`
     }

@@ -69,7 +69,7 @@ class Game {
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponentName, askedRank)
     } else {
-      this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponentName, askedRank, cardsFished))
+      this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer(), askedOpponentName, askedRank, cardsFished, this.over()))
       this.startTurn()
     }
   }
@@ -81,7 +81,7 @@ class Game {
     if(cardsFished.length == 0) {
       this.endTurn(askedOpponent.name(), askedRank)
     } else {
-      this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponent.name(), askedRank, cardsFished))
+      this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer(), askedOpponent.name(), askedRank, cardsFished, this.over()))
       this.startTurn()
     }
   }
@@ -89,7 +89,7 @@ class Game {
   endTurn(askedOpponentName, askedRank) {
     const cardDrawn = this.deck().deal()
     this.turnPlayer().take(cardDrawn)
-    this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer().name(), askedOpponentName, askedRank, cardDrawn))
+    this._results.push(new Result(this.turnIndex() + 1, this.turnPlayer(), askedOpponentName, askedRank, cardDrawn, this.over()))
     this.nextTurn()
   }
 
