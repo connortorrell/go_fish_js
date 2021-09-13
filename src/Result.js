@@ -33,7 +33,11 @@ class Result {
   }
 
   drewCard() {
-    return (!Array.isArray(this.cardsFished()) || this.cardsFished().length === 0 || this.turnPlayer().cardsLeft() === 0) && !this.over()
+    return !Array.isArray(this.cardsFished()) || this.cardsFished().length === 0
+  }
+
+  endOfTurn() {
+    return this.drewCard() || this.turnPlayer().cardsLeft() === 0
   }
 
   message() {

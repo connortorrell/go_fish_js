@@ -41,7 +41,7 @@ class Game {
 
   roundResults() {
     const lastResult = this.results()[this.results().length - 1]
-    return this.results().filter(result => lastResult.drewCard() ? this.turnIndex() - result.turnIndex() < this.players().length : (this.turnIndex() + 1) - result.turnIndex() < this.players().length)
+    return this.results().filter(result => lastResult.endOfTurn() ? this.turnIndex() - result.turnIndex() < this.players().length : (this.turnIndex() + 1) - result.turnIndex() < this.players().length)
   }
 
   turnPlayer() {
@@ -116,6 +116,8 @@ class Game {
           this.playBotTurn()
         }
       }
+    } else {
+      this._turnIndex++
     }
   }
 
